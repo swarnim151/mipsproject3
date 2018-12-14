@@ -65,6 +65,17 @@ main:
     addi $a1, $a1, 1     #adding 1 to the address as we take additional characters
     jr $ra
 
+    check_if_long:
+    lb $a0,($a1)                    # load the byte after the first four valid ones, in the first time the loop executes and subsequent bytes after that
+    addi $a1, $a1, 1                # add 1 to the memory location, the goal is to load the next byte when the loop runs again
+
+    beq $a0, 10, go_to_main
+    #checking if the input character is newline. the ascii value of the newline is 10
+
+    beq $a0, 0, go_to_main
+    #checking if the input character is null. the ascii value of the newline is 0
+
+
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
     addi $t2, $t2, 1                    # incresing value of the loop count as we loop through the string from behind
