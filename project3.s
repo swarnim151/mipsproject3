@@ -23,7 +23,7 @@ main:
 
     jal check_if_long
     # Initialysing registers that hold values needed to calculate the value if the string is valid
-    li $t8, 0
+    li $v1, 0
     li $t1, 1
     li $t2, 0
 
@@ -31,7 +31,7 @@ main:
     jal loop_findvalue
 
     li $v0, 1
-    add $a0, $zero, $t8
+    add $a0, $zero, $v1
     syscall
 
     li $v0,10
@@ -157,7 +157,7 @@ loop_findvalue:
     #findvalue will mutliply the value of the string with the exponent and add it to the sum
 findvalue:
     mul $t6, $t1, $t0
-    add $t8, $t8, $t6
+    add $v1, $v1, $t6
     mul $t1, $t1, 35
     j loop_findvalue
 
