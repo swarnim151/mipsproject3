@@ -27,7 +27,7 @@ main:
     li $t1, 1
     li $t2, 0
 
-    la $t9, users_inputstorage +4
+    la $a2, users_inputstorage +4
     jal loop_findvalue
 
     li $v0, 1
@@ -50,14 +50,14 @@ main:
     li $t0, 1     # setting the value of $t0 value to 1 as mentioned above
 
     # Storing the character and the next three charcters after that as mentioned above
-    la $t9, users_inputstorage
+    la $a2, users_inputstorage
     lb $a0, -1($a1)
-    sb $a0, 0($t9)
+    sb $a0, 0($a2)
     lb $a0, 0($a1)
-    sb $a0, 1($t9)
+    sb $a0, 1($a2)
     addi $a1, $a1, 1    #adding 1 to the address as we take additional characters
     lb $a0, 0($a1)
-    sb $a0, 2($t9)
+    sb $a0, 2($a2)
     addi $a1, $a1, 1    #adding 1 to the address as we take additional characters
     lb $a0, 0($a1)      #After this four characters are stored
     sb $a0, 3($t9)
