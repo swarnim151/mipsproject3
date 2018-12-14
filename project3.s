@@ -118,12 +118,12 @@ loop_findvalue:
     beq $t5, 1, findvalue
 
     #For small letters
-    slti $t4, $t3, 122         #anything below 95 are capital letters or invalid
+    slti $t4, $a1, 122         #anything below 95 are capital letters or invalid
     li $t5, 96
-    slt $t5, $t5, $t3
+    slt $t5, $t5, $a1
     and $t5, $t5, $t4
 
-    addi $t0, $t3, -87
+    addi $t0, $a1, -87
     bne $t5, 1, Input_isInvalidlabel
     j findvalue
 
