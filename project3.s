@@ -37,6 +37,17 @@ main:
     li $v0,10
     syscall
 
+    loop_find4characters:
+    lb $a0,($a1)                    # load the first byte the first time the loop executes and subsequent bytes after that
+    addi $a1, $a1, 1                # add 1 to the memory location, the goal is to load the next byte when the loop runs again
+
+    beq $a0, 10, emptyInputlabel
+    #checking if the input character is newline. the ascii value of the newline is 10
+
+    beq $a0, 32, loop_find4characters
+    #checking if the input character is a spacebar, i.e ' '. the ascii value of the space is 32
+
+
 
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
