@@ -19,8 +19,15 @@ main:
 
     la $a1, Input_askUser
     li $t0, 0                #t0 remains 0 until a valid character is entered. Then, it changes to 1 this distinction is necessary to find out if the input is valid or not
+    jal loop_find4characters
 
-    
+    jal check_if_long
+    # Initialysing registers that hold values needed to calculate the value if the string is valid
+    li $t8, 0
+    li $t1, 1
+    li $t2, 0
+
+
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
     addi $t2, $t2, 1                    # incresing value of the loop count as we loop through the string from behind
