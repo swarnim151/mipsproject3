@@ -47,6 +47,13 @@ main:
     beq $a0, 32, loop_find4characters
     #checking if the input character is a spacebar, i.e ' '. the ascii value of the space is 32
 
+    li $t0, 1     # setting the value of $t0 value to 1 as mentioned above
+
+    # Storing the character and the next three charcters after that as mentioned above
+    la $t9, users_inputstorage
+    lb $a0, -1($a1)
+    sb $a0, 0($t9)
+    lb $a0, 0($a1)
 
 
 loop_findvalue:
