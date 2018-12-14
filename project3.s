@@ -109,7 +109,7 @@ loop_findvalue:
     beq $t5, 1, findvalue
 
     #For Capital letters
-    slti $t4, $t3, 95             #anything below 95 are capital letters or invalid
+    slti $t4, $t3, 90             #anything below 90 are capital letters or invalid
     li $t5, 64
     slt $t5, $t5, $t3
     and $t5, $t5, $t4
