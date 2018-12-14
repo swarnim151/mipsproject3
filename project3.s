@@ -23,15 +23,15 @@ main:
 
     jal check_if_long
     # Initialysing registers that hold values needed to calculate the value if the string is valid
-    li $v1, 0
+    li $t8, 0
     li $t1, 1
     li $t2, 0
 
-    la $a2, users_inputstorage +4
+    la $t9, users_inputstorage +4
     jal loop_findvalue
 
     li $v0, 1
-    add $a0, $zero, $v1
+    add $a0, $zero, $t8
     syscall
 
     li $v0,10
@@ -50,17 +50,17 @@ main:
     li $t0, 1     # setting the value of $t0 value to 1 as mentioned above
 
     # Storing the character and the next three charcters after that as mentioned above
-    la $a2, users_inputstorage
+    la $t9, users_inputstorage
     lb $a0, -1($a1)
-    sb $a0, 0($a2)
+    sb $a0, 0($t9)
     lb $a0, 0($a1)
-    sb $a0, 1($a2)
+    sb $a0, 1($t9)
     addi $a1, $a1, 1    #adding 1 to the address as we take additional characters
     lb $a0, 0($a1)
-    sb $a0, 2($a2)
+    sb $a0, 2($t9)
     addi $a1, $a1, 1    #adding 1 to the address as we take additional characters
     lb $a0, 0($a1)      #After this four characters are stored
-    sb $a0, 3($a2)
+    sb $a0, 3($t9)
 
     addi $a1, $a1, 1     #adding 1 to the address as we take additional characters
     jr $ra
@@ -86,21 +86,21 @@ loop_findvalue:
     beq $t2, 4, go_to_main        #this checks if we have gone through all the values. It ends the loop
     addi $t2, $t2, 1                    # incresing value of the loop count as we loop through the string from behind
 
-    addi $a2, $a2, -1                   #increasing the value of the address by 1.In the next loop we look at the 2nd last, then 2nd and 1st chracter
-    lb $t3, ($a2)                # loading the value of the byte to $t3
+    addi $t9, $t9, -1                   #increasing the value of the address by 1.In the next loop we look at the 2nd last, then 2nd and 1st chracter
+    lb $a1, ($t9)                # loading the value of the byte to $a1
 
-    beq $t3, 10, loop_findvalue      # check if the character is a new line. We will ignore it if it is
+    beq $a1, 10, loop_findvalue      # check if the character is a new line. We will ignore it if it is
 
-    beq $t3, 32, check_forspace        # check if the character is a space. We will ignore it if it is
+    beq $a1, 32, check_forspace        # check if the character is a space. We will ignore it if it is
 
-    beq $t3, 0, loop_findvalue        # check if the character is a null. We will ignore it if it is
+    beq $a1, 0, loop_findvalue        # check if the character is a null. We will ignore it if it is
 
     li $a3, 1                # initializing the value as we reach the last valid character
 
     #characater could be numbers or letters
 
     #For numbers
-    slti $t4, $t3, 58                     #anything below 58 is either a number or invalid
+    slti $t4, $a1, 58                     #anything below 58 is either a number or invalid
     li $t5, 47
 
     slt $t5, $t5, $t3
@@ -157,7 +157,7 @@ loop_findvalue:
     #findvalue will mutliply the value of the string with the exponent and add it to the sum
 findvalue:
     mul $t6, $t1, $t0
-    add $v1, $v1, $t6
+    add $t8, $t8, $t6
     mul $t1, $t1, 35
     j loop_findvalue
 
