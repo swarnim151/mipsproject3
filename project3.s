@@ -27,6 +27,13 @@ main:
     li $t1, 1
     li $t2, 0
 
+    la $t9, users_inputstorage +4
+    jal loop_findvalue
+
+    li $v0, 1
+    add $a0, $zero, $t8
+    syscall
+
 
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
