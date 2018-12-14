@@ -152,6 +152,8 @@ loop_findvalue:
     beq $a3, 1, Input_isInvalidlabel
     j loop_findvalue            #
 
+    go_to_main:   #returning to main
+    jr $ra
     #findvalue will mutliply the value of the string with the exponent and add it to the sum
 findvalue:
     mul $t6, $t1, $t0
