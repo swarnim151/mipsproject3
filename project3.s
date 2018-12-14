@@ -103,17 +103,17 @@ loop_findvalue:
     slti $t4, $a1, 58                     #anything below 58 is either a number or invalid
     li $t5, 47
 
-    slt $t5, $t5, $t3
+    slt $t5, $t5, $a1
     and $t5, $t5, $t4
-    addi $t0, $t3, -48            # t0 stores the actual value of the number
+    addi $t0, $a1, -48            # t0 stores the actual value of the number
     beq $t5, 1, findvalue
 
     #For Capital letters
-    slti $t4, $t3, 90             #anything below 90 are capital letters or invalid
+    slti $t4, $a1, 90             #anything below 90 are capital letters or invalid
     li $t5, 64
-    slt $t5, $t5, $t3
+    slt $t5, $t5, $a1
     and $t5, $t5, $t4
-    addi $t0, $t3, -55
+    addi $t0, $a1, -55
 
     beq $t5, 1, findvalue
 
