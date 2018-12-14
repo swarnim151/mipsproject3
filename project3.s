@@ -75,6 +75,12 @@ main:
     beq $a0, 0, go_to_main
     #checking if the input character is null. the ascii value of the newline is 0
 
+    beq $a0, 32, check_if_long
+    #checking if the input character is a spacebar, i.e ' '. the ascii value of the space is 32
+
+    beq $t0, 1, Input_isLonglabel
+    # if we find another non-space character after that then the input is too long.
+
 
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
