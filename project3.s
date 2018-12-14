@@ -54,7 +54,11 @@ main:
     lb $a0, -1($a1)
     sb $a0, 0($t9)
     lb $a0, 0($a1)
-
+    sb $a0, 1($t9)
+    addi $a1, $a1, 1    #adding 1 to the address as we take additional characters
+    lb $a0, 0($a1)
+    sb $a0, 2($t9)
+    addi $a1, $a1, 1    #adding 1 to the address as we take additional characters
 
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
