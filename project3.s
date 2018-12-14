@@ -34,6 +34,9 @@ main:
     add $a0, $zero, $t8
     syscall
 
+    li $v0,10
+    syscall
+
 
 loop_findvalue:
     beq $t2, 4, check_if_loop_continues        #this checks if we have gone through all the values. It ends the loop
